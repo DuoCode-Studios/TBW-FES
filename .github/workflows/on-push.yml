@@ -6,27 +6,40 @@ on:
       - main
 
 jobs:
-  updateAuthor:
+  create_pull_request:
     runs-on: ubuntu-latest
     steps:
-      - name: Checking out the code
+      - name: Checkout repository
         uses: actions/checkout@v2
 
       - name: Extract Git commit data
         uses: rlespinasse/git-commit-data-action@v1.x
 
-      - name:  Update Author Information
+      - name: Update Author Information
         run: echo ${{ env.GIT_COMMIT_AUTHOR_NAME }} > AUTHOR
 
-      - name: Raise a PR
+      - name: Commit changes
+        run: |
+          git config --global user.email "${{ secrets.GITHUB_ACTOR }}@users.noreply.github.com"
+          git config --global user.name "${{ secrets.GITHUB_ACTOR }}"
+          git checkout -b auto-pr-branch
+          git add AUTHOR
+          git commit -m "Update author information"
+
+      - name: Push changes to new branch
+        uses: ad-m/github-push-action@v0.6.0
+        with:
+          branch: auto-pr-branch
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          branch: "auto-pr-branch"
+          branch: auto-pr-branch
           base: main
-          title: "auto-pr-branch"
+          title: "Update author information"
+          body: "This is an automatic PR"
+          token: ${{ secrets.GITHUB_TOKEN }}
           committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
           author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
-          body:
-            This is a automatic PR
-          token: ${{ secrets.GITHUB_TOKEN }}
           delete-branch: true
