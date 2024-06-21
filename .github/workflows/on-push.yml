@@ -12,11 +12,6 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v3
 
-      - name: Set up Git
-        run: |
-          git config --global user.name "${{ github.actor }}"
-          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
-
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
         with:
@@ -26,4 +21,3 @@ jobs:
           branch: ${{ github.ref }}
           delete-branch: false
           reviewers: Dorito
-          author: '${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>'
