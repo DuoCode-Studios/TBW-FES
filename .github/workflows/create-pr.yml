@@ -32,3 +32,5 @@ jobs:
           delete-branch: false
           team-reviewers: DuoCode-Studios/Dorito
           author: '${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>'
+
+      continue-on-error: true
