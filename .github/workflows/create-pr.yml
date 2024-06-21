@@ -35,7 +35,6 @@ jobs:
           base: main
           branch: ${{ github.ref_name }}
           delete-branch: false
-          team-reviewers: DuoCode-Studios/Dorito
           author: '${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>'
           body: |
             # Pull Request Description
