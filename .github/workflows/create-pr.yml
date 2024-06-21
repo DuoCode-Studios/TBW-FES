@@ -34,11 +34,15 @@ jobs:
           author: '${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>'
           assignees: ${{ github.actor }}
           body: |
-            # Pull request description
-            ## Short description
-            ...
+            # Pull Request Description
+
+            ## Short Description
+            [Put some short details about your canges and addons.]
+
             ## Trello Card Link
-            
+            [Link of the Trello card relationed of this PR.]
+
             ## Additional Notes
+            [Something extra about the PR]
 
     continue-on-error: true
