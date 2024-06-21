@@ -22,7 +22,8 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           commit-message: 'Auto-generated PR from push'
-          branch: main
+          base: main
+          branch: ${{ github.ref }}
           delete-branch: false
           reviewers: Dorito
           author: '${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>'
