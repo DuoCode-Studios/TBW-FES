@@ -8,12 +8,16 @@ on:
 jobs:
   create_pull_request:
     runs-on: ubuntu-latest
-    continue-on-error: true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18' # Use a more recent version of Node.js
 
       - name: Authenticate with GitHub
         run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
@@ -45,3 +49,5 @@ jobs:
 
             ## Additional Notes
             [Something extra about the PR]
+
+    continue-on-error: true
