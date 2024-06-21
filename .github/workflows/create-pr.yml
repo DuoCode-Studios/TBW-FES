@@ -1,0 +1,36 @@
+name: Create Pull Request
+
+on:
+  push:
+    branches-ignore:
+      - main
+
+jobs:
+  create_pull_request:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false
+
+      - name: Authenticate with GitHub
+        run: echo "${{ secrets.GITHUB_TOKEN }}" | gh auth login --with-token
+
+      - name: Set up Git
+        run: |
+          git config --global user.name "${{ github.actor }}"
+          git config --global user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          commit-message: 'Auto-generated PR from push'
+          base: main
+          branch: ${{ github.ref_name }}
+          delete-branch: false
+          team-reviewers: DuoCode-Studios/Dorito
+          author: '${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>'
+
+      continue-on-error: true
