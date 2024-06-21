@@ -22,24 +22,21 @@ jobs:
         run: |
           git config --global user.email "${{ secrets.GITHUB_ACTOR }}@users.noreply.github.com"
           git config --global user.name "${{ secrets.GITHUB_ACTOR }}"
-          git checkout -b auto-pr-branch
           git add AUTHOR
           git commit -m "Update author information"
 
-      - name: Push changes to new branch
+      - name: Push changes
         uses: ad-m/github-push-action@v0.6.0
         with:
-          branch: auto-pr-branch
           github_token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v3
         with:
-          branch: auto-pr-branch
+          branch: ${{ github.ref_name }}
           base: main
           title: "Update author information"
           body: "This is an automatic PR"
           token: ${{ secrets.GITHUB_TOKEN }}
           committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
           author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
-          delete-branch: true
