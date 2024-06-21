@@ -32,5 +32,13 @@ jobs:
           delete-branch: false
           team-reviewers: DuoCode-Studios/Dorito
           author: '${{ github.actor }} <${{ github.actor }}@users.noreply.github.com>'
+          assignees: ${{ github.actor }}
+          body: |
+            # Pull request description
+            ## Short description
+            ...
+            ## Trello Card Link
+            
+            ## Additional Notes
 
-      continue-on-error: true
+    continue-on-error: true
