@@ -20,13 +20,13 @@ jobs:
 
       - name: Raise a PR
         uses: peter-evans/create-pull-request@v3
-          with:
-            branch: "auto-pr-branch"
-            base: main
-            title: "auto-pr-branch"
-            committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
-            author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
-            body:
-              This is a automatic PR
-            token: ${{ secrets.GITHUB_TOKEN }}
-            delete-branch: true
+        with:
+          branch: "auto-pr-branch"
+          base: main
+          title: "auto-pr-branch"
+          committer: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
+          author: ${{ env.GIT_COMMIT_AUTHOR_NAME }} <${{ env.GIT_COMMIT_AUTHOR_EMAIL }}>
+          body:
+            This is a automatic PR
+          token: ${{ secrets.GITHUB_TOKEN }}
+          delete-branch: true
