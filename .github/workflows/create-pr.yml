@@ -8,6 +8,7 @@ on:
 jobs:
   create_pull_request:
     runs-on: ubuntu-latest
+    continue-on-error: true
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
@@ -37,12 +38,10 @@ jobs:
             # Pull Request Description
 
             ## Short Description
-            [Put some short details about your canges and addons.]
+            [Put some short details about your changes and addons.]
 
             ## Trello Card Link
-            [Link of the Trello card relationed of this PR.]
+            [Link of the Trello card related to this PR.]
 
             ## Additional Notes
             [Something extra about the PR]
-
-    continue-on-error: true
