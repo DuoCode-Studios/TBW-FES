@@ -2,6 +2,8 @@ name: Create Pull Request
 
 on:
   push:
+    branches-ignore:
+      - main
 
 jobs:
   create_pull_request:
